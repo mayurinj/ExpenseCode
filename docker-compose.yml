@@ -1,0 +1,32 @@
+version: '3.1'
+services: 
+ db: 
+   image: mariadb
+   restart: always
+   environment: 
+     MYSQL_ROOT_PASSWORD: root
+     MYSQL_DATABASE: expensecodemodule
+   ports: 
+     - 3306:3306
+
+ adminer: 
+   image: adminer
+   restart: always
+   ports: 
+     - 8080:8080
+
+ spring-boot-rest-app: 
+   image: spring-boot-rest-app
+   command: java -jar expensecode.jar
+   restart: always
+   build:
+     context: ./
+     dockerfile: DockerFile
+   depends_on:
+     - db
+   ports:
+     - 8083:8083
+   environment:
+     - SPRING_DATASOURCE_URL=jdbc:mariadb://db:3306/expensecodemodule
+     - SPRING_DATASOURCE_USERNAME=root
+     - SPRING_DATASOURCE_PASSWORD=root
