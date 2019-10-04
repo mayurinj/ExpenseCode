@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @ControllerAdvice
-public class TDSServiceErrorAdvice
+public class EMSServiceErrorAdvice
 {
 	@ResponseBody
 	@ResponseStatus(value=HttpStatus.NOT_FOUND)
